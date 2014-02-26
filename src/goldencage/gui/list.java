@@ -8,6 +8,8 @@ package goldencage.gui;
 
 import goldencage.Dao.offreDao;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -18,8 +20,9 @@ public class list extends javax.swing.JFrame {
 
     /**
      * Creates new form list
+     * @throws java.sql.SQLException
      */
-    public list() {
+    public list() throws SQLException {
        
     offreDao dao = new offreDao();
         DefaultListModel DLM = new  DefaultListModel();
@@ -110,7 +113,11 @@ for(int i = 0;i <=size;i++){
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new list().setVisible(true);
+                try {
+                    new list().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(list.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
